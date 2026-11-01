@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Parking Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Authentication -->
+    <div id="authContainer" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">🚗</div>
+            <h1>Smart Parking</h1>
+            <p class="subtitle">Your Smart Parking Solution</p>
+
+            <div class="auth-tabs">
+                <button id="loginTab" class="active" onclick="showAuth('login')">
+                    Login
+                </button>
+                <button id="signupTab" onclick="showAuth('signup')">
+                    Sign Up
+                </button>
+            </div>
+
+            <!-- Login -->
+            <form id="loginForm">
+                <h2>Welcome Back!</h2>
+                <input type="email" id="loginEmail"
+                       placeholder="Email Address" required>
+                <input type="password" id="loginPassword"
+                       placeholder="Password" required>
+                <button type="submit" class="primary-btn">Login</button>
+                <p id="loginMessage" class="message"></p>
+            </form>
+
+            <!-- Signup -->
+            <form id="signupForm" class="hidden">
+                <h2>Create Account</h2>
+                <input type="text" id="signupName"
+                       placeholder="Full Name" required>
+                <input type="email" id="signupEmail"
+                       placeholder="Email Address" required>
+                <input type="password" id="signupPassword"
+                       placeholder="Create Password" minlength="6" required>
+                <input type="password" id="confirmPassword"
+                       placeholder="Confirm Password" required>
+                <button type="submit" class="primary-btn">Create Account</button>
+                <p id="signupMessage" class="message"></p>
+            </form>
+
+            <button class="theme-btn auth-theme" onclick="toggleTheme()">
+                🌙 Dark Mode
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="appContainer" class="container hidden">
+
+        <aside class="sidebar">
+            <h2>🚗 Smart Parking</h2>
+            <p class="backend">Management System</p>
+
+            <button onclick="showSection('dashboard')">🏠 Dashboard</button>
+            <button onclick="showSection('park')">🚘 Park Vehicle</button>
+            <button onclick="showSection('remove')">🚪 Remove Vehicle</button>
+            <button onclick="showSection('search')">🔍 Search Vehicle</button>
+            <button onclick="showSection('slots')">🅿️ View Slots</button>
+
+            <div class="sidebar-bottom">
+                <button class="theme-btn" onclick="toggleTheme()">
+                    🌙 Toggle Dark Mode
+                </button>
+                <button class="logout-btn" onclick="logout()">
+                    🚪 Logout
+                </button>
+            </div>
+        </aside>
+
+        <main class="main">
+
+            <header class="topbar">
+                <div>
+                    <h1>Smart Parking Management System</h1>
+                    <p>Manage your parking easily and efficiently.</p>
+                </div>
+                <div class="user-info">
+                    <span id="welcomeUser">Welcome!</span>
+                    <span class="user-avatar">👤</span>
+                </div>
+            </header>
+
+            <!-- Dashboard -->
+            <section id="dashboard" class="section">
+                <div class="cards">
+                    <div class="card">
+                        <h3>Total Slots</h3>
+                        <h1 id="totalSlots">10</h1>
+                    </div>
+                    <div class="card">
+                        <h3>Occupied</h3>
+                        <h1 id="occupiedSlots">0</h1>
+                    </div>
+                    <div class="card">
+                        <h3>Available</h3>
+                        <h1 id="availableSlots">10</h1>
+                    </div>
+                    <div class="card">
+                        <h3>Revenue</h3>
+                        <h1>₹<span id="revenue">0</span></h1>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Parking Overview</h2>
+                    <div id="slotContainer" class="slot-container"></div>
+                </div>
+            </section>
+
+            <!-- Park Vehicle -->
+            <section id="park" class="section hidden">
+                <div class="form-box">
+                    <h2>🚘 Park Vehicle</h2>
+
+                    <input type="text" id="vehicleNumber"
+                           placeholder="Vehicle Number e.g. PB10AB1234">
+
+                    <select id="vehicleType">
+                        <option value="Car">Car</option>
+                        <option value="Bike">Bike</option>
+                    </select>
+
+                    <button onclick="parkVehicle()">Park Vehicle</button>
+                    <p id="parkMessage" class="message"></p>
+                </div>
+            </section>
+
+            <!-- Remove Vehicle -->
+            <section id="remove" class="section hidden">
+                <div class="form-box">
+                    <h2>🚪 Remove Vehicle</h2>
+
+                    <input type="text" id="removeNumber"
+                           placeholder="Enter Vehicle Number">
+
+                    <input type="number" id="hours"
+                           placeholder="Parking Hours" min="1">
+
+                    <button onclick="removeVehicle()">Remove Vehicle</button>
+                    <p id="removeMessage" class="message"></p>
+                </div>
+            </section>
+
+            <!-- Search Vehicle -->
+            <section id="search" class="section hidden">
+                <div class="form-box">
+                    <h2>🔍 Search Vehicle</h2>
+
+                    <input type="text" id="searchNumber"
+                           placeholder="Enter Vehicle Number">
+
+                    <button onclick="searchVehicle()">Search</button>
+                    <div id="searchResult"></div>
+                </div>
+            </section>
+
+            <!-- Parking Slots -->
+            <section id="slots" class="section hidden">
+                <div class="panel">
+                    <h2>🅿️ All Parking Slots</h2>
+                    <div id="allSlots" class="slot-container"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
